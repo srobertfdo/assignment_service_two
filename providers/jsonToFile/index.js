@@ -1,6 +1,6 @@
 const json2csvConverter = require('json-2-csv');
-const json2xmlConverter = require('xml-js');
-const xml2jsConverter = require('xml2js');
+const {parseString } = require('xml2js');
+const  xml2js = require('xml2js');
 const ApplicationException = use('App/Exceptions/ApplicationException')
 
 class JsonToFile {
@@ -17,8 +17,8 @@ class JsonToFile {
         }
 
         if(type.toLowerCase() == 'xml'){
-          var options = {compact: true, ignoreComment: true, spaces: 4};
-          fileData = await json2xmlConverter.json2xml(json, options)
+          var builder = new xml2js.Builder({headless :true});
+          fileData =  builder.buildObject(json);
         }
 
         return  fileData;
@@ -36,10 +36,9 @@ class JsonToFile {
         }
 
         if(type.toLowerCase() == 'xml'){
-          console.log('fileData', fileData)
-
-          var options = {compact: true, ignoreComment: true, spaces: 4};
-          json = json2xmlConverter.xml2json(fileData, options)
+          parseString(fileData, function (err, results) {
+              json = results;
+          });
         }
 
         return json
