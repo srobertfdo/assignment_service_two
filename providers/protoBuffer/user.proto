@@ -1,0 +1,9 @@
+package userpackage;
+syntax = "proto3";
+
+message User {
+  required string name = 1;
+  required string dob = 2;
+  required int32 salary = 3;
+  required int32 age = 4;
+}
