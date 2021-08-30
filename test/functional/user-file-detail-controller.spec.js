@@ -5,12 +5,6 @@ const Encryption = use('Encryption')
 
 trait("Test/ApiClient");
 
-test("Test Get User File Data", async ({ assert, client }) => {
-  const response = await client.get("/user/files/df9e4ffa-bfb5-42a9-826d-28ad9fc48945/data").end();
-
-  response.assertStatus(400);
-}).timeout(0);
-
 test("Test Get All User Files ", async ({ assert, client }) => {
   const response = await client.get("/user/files").end();
 
