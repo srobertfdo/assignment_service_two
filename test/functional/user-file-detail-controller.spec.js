@@ -8,12 +8,7 @@ trait("Test/ApiClient");
 test("Test Get User File Data", async ({ assert, client }) => {
   const response = await client.get("/user/files/df9e4ffa-bfb5-42a9-826d-28ad9fc48945/data").end();
 
-  response.assertStatus(200);
-
-  assert.isDefined(response.body.data)
-  let decryptedResponseBody = JSON.parse(Encryption.decrypt(response.body.data))
-  assert.isDefined(decryptedResponseBody.uuid)
-  assert.equal('df9e4ffa-bfb5-42a9-826d-28ad9fc48945', decryptedResponseBody.uuid)
+  response.assertStatus(400);
 }).timeout(0);
 
 test("Test Get All User Files ", async ({ assert, client }) => {
